@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37e77eb3-75ec-4bca-a2ec-432ae2320117" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/business/_navbar.html.erb" afterPath="$PROJECT_DIR$/app/views/business/_navbar.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/business.css.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/business.css.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/business/index.html.erb" afterPath="$PROJECT_DIR$/app/views/business/index.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
     </list>
     <ignored path="autismhelp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -15,6 +14,7 @@
     <file path="/routes.rb" changelist="37e77eb3-75ec-4bca-a2ec-432ae2320117" time="1368296673630" ignored="false" />
     <file path="/README.rdoc" changelist="37e77eb3-75ec-4bca-a2ec-432ae2320117" time="1368296852112" ignored="false" />
     <file path="/index.html.erb" changelist="37e77eb3-75ec-4bca-a2ec-432ae2320117" time="1368297953137" ignored="false" />
+    <file path="/Gemfile" changelist="37e77eb3-75ec-4bca-a2ec-432ae2320117" time="1368298724094" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,10 +36,10 @@
     <splitter split-orientation="horizontal" split-proportion="0.5079765">
       <split-first>
         <leaf>
-          <file leaf-file-name="Gemfile" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="Gemfile" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Gemfile">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="39" column="34" selection-start="801" selection-end="801" vertical-scroll-proportion="0.0">
+                <state line="9" column="0" selection-start="180" selection-end="180" vertical-scroll-proportion="0.21428572">
                   <folding />
                 </state>
               </provider>
@@ -54,10 +54,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="_navbar.html.erb" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="_navbar.html.erb" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/views/business/_navbar.html.erb">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="8" column="31" selection-start="362" selection-end="362" vertical-scroll-proportion="0.1980198">
+                <state line="8" column="31" selection-start="362" selection-end="362" vertical-scroll-proportion="-5.0">
                   <folding />
                 </state>
               </provider>
@@ -152,7 +152,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/application.js" />
         <option value="$PROJECT_DIR$/app/views/business/show.html.erb" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
@@ -161,12 +160,13 @@
         <option value="$PROJECT_DIR$/app/views/business/_navbar.html.erb" />
         <option value="$PROJECT_DIR$/app/views/business/index.html.erb" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/business.css.scss" />
+        <option value="$PROJECT_DIR$/Gemfile" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-59" />
-    <option name="y" value="65" />
+    <option name="x" value="5" />
+    <option name="y" value="47" />
     <option name="width" value="1523" />
     <option name="height" value="791" />
   </component>
@@ -610,7 +610,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-59" y="65" width="1523" height="791" extended-state="0" />
+    <frame x="5" y="47" width="1523" height="791" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -736,13 +736,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Gemfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="34" selection-start="801" selection-end="801" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/javascripts/application.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="0" selection-start="675" selection-end="675" vertical-scroll-proportion="0.0">
@@ -803,7 +796,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/business/_navbar.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="31" selection-start="362" selection-end="362" vertical-scroll-proportion="0.1980198">
+        <state line="8" column="31" selection-start="362" selection-end="362" vertical-scroll-proportion="-5.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gemfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="0" selection-start="180" selection-end="180" vertical-scroll-proportion="0.21428572">
           <folding />
         </state>
       </provider>
