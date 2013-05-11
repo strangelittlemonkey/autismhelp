@@ -2,6 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+$baseFontFamily: Ubuntu;
+@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+
 body {
   margin: 0px;
   padding: 0px;
@@ -43,11 +49,6 @@ input[type="submit"] {
   width: 50px;
   border-radius: 0px 10px 10px 0px;
 }
-@import "bootstrap";
-@import "bootstrap-responsive";
-
-$baseFontFamily: Ubuntu;
-@import url(http://fonts.googleapis.com/css?family=Ubuntu);
 
 .all-info {
   width: 500px;
@@ -59,13 +60,29 @@ $baseFontFamily: Ubuntu;
   .main-image img {
     width: 150px;
     float: left;
-    padding-right: 20px;
+    margin-right: 20px;
+    border-radius: 6px;
+    &:hover {
+      box-shadow:1px 1px 10px #444;
+    }
   }
 }
 
-.photos {
+.photos, .reviews {
   font-family: Ubuntu;
   margin: 15px;
+}
+
+/* Navbar */
+
+.navbar-inner {
+  border-radius: 0px;
+}
+
+input.search-query {
+  background-color: #ffffff;
+  border: 1px solid darkgrey;
+  margin-top: -1px;
 }
 
 

@@ -1,6 +1,6 @@
 Autismhelp::Application.routes.draw do
   resources :business
-
+  root to: "business#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
