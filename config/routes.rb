@@ -1,4 +1,6 @@
 Autismhelp::Application.routes.draw do
+  get "about" => "business#about"
+
   resources :business
   root to: "business#index"
   # The priority is based upon order of creation:
