@@ -44,6 +44,9 @@ GEM
       multi_json (~> 1.0)
     geocoder (1.1.8)
     hike (1.2.2)
+    httparty (0.11.0)
+      multi_json (~> 1.0)
+      multi_xml (>= 0.5.2)
     i18n (0.6.1)
     journey (1.0.4)
     jquery-rails (2.2.1)
@@ -56,6 +59,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.23)
     multi_json (1.7.3)
+    multi_xml (0.5.3)
     pg (0.15.1)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -110,8 +114,13 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass (~> 2.2.2.0)
   coffee-rails (~> 3.2.1)
+<<<<<<< HEAD
+  httparty (~> 0.11.0)
+=======
   geocoder
+>>>>>>> 60b3a979bfc07562e569d286ce4257688568d090
   jquery-rails
+  json
   pg
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)

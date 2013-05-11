@@ -1,21 +1,48 @@
+
 <%= render 'business/navbar' %>
+   <div class="row-fluid">
+     <div class="span5">
 <div class="all-info">
 <div class="main-image">
 <%= image_tag('placeholder.jpg') %>
 </div>
 <div class="business-info">
-<h2>Business Name</h2>
+<h2>Gary Danko</h2>
   <% 4.times do |star| %>
   <%= image_tag('redstar.jpeg', :size => "20x20" ) %>
   <% end %>
-<p class="attributes">Autism friendly</p>
+<p class="attributes">Autism friendly | Category: Restaurants (American)</p>
 </div>
 </div>
 <br>
+<div class="address">
+  <p>800 N Point St<br>
+  San Francisco, CA 94109</p>
+</div>
 <div class="photos">
   <h2>Photos</h2>
+  <ul class="thumbnails">
+    <li class="span3">
+      <a href="#" class="thumbnail">
+        <%= image_tag('components.png', :class => "thumb-photo") %>
+      </a>
+    </li>
+    <li class="span3">
+      <a href="#" class="thumbnail">
+        <%= image_tag('components.png', :class => "thumb-photo") %>
+      </a>
+    </li>
+    <li class="span3">
+      <a href="#" class="thumbnail">
+        <%= image_tag('components.png', :class => "thumb-photo") %>
+      </a>
+    </li>
+  </ul>
 </div>
 <div class="reviews">
   <h2>Reviews</h2>
 </div>
+</div>
+</div>
 
+<%= debug JSON.parse(@venue_query.response.body) %>
