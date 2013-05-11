@@ -19,6 +19,9 @@ class BusinessController < ApplicationController
 
     @photo_query = HTTParty.get("https://api.foursquare.com/v2/venues/" + @venue_id + "/photos?oauth_token=2YEFFRGQYVIGT2EJ30RHYLGELUCW04KHQM231ZSM3HOXQFBS&v=20130511")
     @num_photos = JSON.parse(@photo_query.response.body)["response"]["photos"]["count"]
+
+    @bus_id = 1
+    @revtilt_url = "http://revtilt.com/api/v1/organizations/" + @bus_id.to_s + ".json?page=1"
   end
 
   def about

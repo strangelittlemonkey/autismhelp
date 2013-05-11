@@ -85,6 +85,7 @@ input[type="submit"] {
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
+  margin-left: 25px;
   -webkit-overflow-scrolling: touch;
   width: 100%;
   .crop {
@@ -104,10 +105,25 @@ input[type="submit"] {
 
 .navbar-inner {
   border-radius: 0px;
+  background-color: #113971;
+  background-image: none;
+  background-repeat: no-repeat;
+  filter:none;
+  border-bottom: 1px solid black;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  a.brand {
+    color: white;
+  }
+  .nav li a {
+    color: white;
+  }
   input#search-query {
-    background-color: #ffffff;
+    background-color: #e3ecf7;
     border: 1px solid darkgrey;
-    width: 100%;
+    color: black;
+    width: 300px;
     margin-top: -1px;
   }
   .help {
