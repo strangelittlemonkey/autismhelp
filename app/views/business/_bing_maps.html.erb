@@ -2,12 +2,21 @@
 <script type="text/javascript">
   function GetMap()
   {
+    var myLat = 37.795;
+    var myLng = -122.408;
+    if (myLat == null) {
+      myLat = 37.755;
+    }
+    if (myLng == null) {
+      myLng = -122.438;
+    }
+    //console.log(getUrlVars());
     var map = new Microsoft.Maps.Map(document.getElementById('bing_map'), 
       {credentials: 'Av3KxY1c6mhrQ-kkwXXiJLBVEbvUUs-VnYPFtfTGh443r4xyegm7QWbzFILo_mDa',
-       center: new Microsoft.Maps.Location(37.755, -122.438),
+       center: new Microsoft.Maps.Location(myLat, myLng),
        mapTypeId: Microsoft.Maps.MapTypeId.road,
        showScalebar: false,
        showDashboard: false,
-       zoom: 12});
+       zoom: 14});
   }
 </script>
