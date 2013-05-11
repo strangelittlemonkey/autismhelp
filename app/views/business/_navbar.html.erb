@@ -22,7 +22,7 @@
         <!-- .nav, .navbar-search, .navbar-form, etc -->
         <form class="navbar-search pull-right">
           <%= form_tag({ action: "index" }, method: :get) do %>
-            <%= text_field_tag "address", "Search", class: "search-query" %>  
+            <%= text_field_tag "address", "Search", id: "search-query" %>  
           <% end %>
         </form>
       </div>
