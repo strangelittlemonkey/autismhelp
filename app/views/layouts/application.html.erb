@@ -4,9 +4,11 @@
   <title>Autismhelp</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
   <%= csrf_meta_tags %>
+  <%= yield :bing_map %>
 </head>
-<body>
+<body onload="GetMap();">
 
 <%= yield %>
 

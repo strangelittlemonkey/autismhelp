@@ -1,7 +1,5 @@
 Autismhelp::Application.routes.draw do
-  get "business/index"
-
-  get "business/show"
+  resources :business
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

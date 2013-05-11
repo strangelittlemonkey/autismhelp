@@ -1,2 +1,9 @@
-<h1>Business#index</h1>
-<p>Find me in app/views/business/index.html.erb</p>
+<% content_for :bing_map do %>
+  <%= render 'bing_maps' %>
+<% end %>
+
+<div id='bing_map'></div>
+
+<div id='overlay_top'>
+  <input type="text"></input><input type="submit" value="Find"></input>
+</div>
