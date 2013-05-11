@@ -2,21 +2,26 @@
 <script type="text/javascript">
   function GetMap()
   {
-    var myLat = 37.795;
-    var myLng = -122.408;
-    if (myLat == null) {
-      myLat = 37.755;
-    }
-    if (myLng == null) {
-      myLng = -122.438;
-    }
+    var myLat = <%= @lat %>;
+    var myLng = <%= @lng %>;
     //console.log(getUrlVars());
+    var location = new Microsoft.Maps.Location(myLat, myLng);
     var map = new Microsoft.Maps.Map(document.getElementById('bing_map'), 
       {credentials: 'Av3KxY1c6mhrQ-kkwXXiJLBVEbvUUs-VnYPFtfTGh443r4xyegm7QWbzFILo_mDa',
-       center: new Microsoft.Maps.Location(myLat, myLng),
+       center: location,
        mapTypeId: Microsoft.Maps.MapTypeId.road,
        showScalebar: false,
        showDashboard: false,
        zoom: 14});
+    var pin = new Microsoft.Maps.Pushpin(location);
+    if (myLat == 37.795 && myLng == -122.408) {
+    }
+    else {
+      map.entities.push(pin);
+      map.setView({
+        center: location,
+        zoom: 16
+      });
+    }
   }
 </script>
