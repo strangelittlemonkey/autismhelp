@@ -43,3 +43,29 @@ input[type="submit"] {
   width: 50px;
   border-radius: 0px 10px 10px 0px;
 }
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+$baseFontFamily: Ubuntu;
+@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+
+.all-info {
+  width: 500px;
+  margin: 15px;
+  font-family: Ubuntu;
+  .attributes {
+    margin-top: 10px;
+  }
+  .main-image img {
+    width: 150px;
+    float: left;
+    padding-right: 20px;
+  }
+}
+
+.photos {
+  font-family: Ubuntu;
+  margin: 15px;
+}
+
+
