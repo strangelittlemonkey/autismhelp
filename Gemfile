@@ -44,3 +44,5 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem 'bootstrap-sass', '~> 2.2.2.0'
+gem "httparty", "~> 0.11.0"
+gem "json"
