@@ -19,30 +19,16 @@
   <p>800 N Point St<br>
   San Francisco, CA 94109</p>
 </div>
+ <h2>Photos</h2>
 <div class="photos">
-  <h2>Photos</h2>
-  <ul class="thumbnails">
-    <li class="span3">
-      <a href="#" class="thumbnail">
-        <%= image_tag('components.png', :class => "thumb-photo") %>
-      </a>
-    </li>
-    <li class="span3">
-      <a href="#" class="thumbnail">
-        <%= image_tag('components.png', :class => "thumb-photo") %>
-      </a>
-    </li>
-    <li class="span3">
-      <a href="#" class="thumbnail">
-        <%= image_tag('components.png', :class => "thumb-photo") %>
-      </a>
-    </li>
-  </ul>
+    <% (JSON.parse(@photo_query.response.body)["response"]["photos"]["items"]).each do |photo| %>
+      <div class="crop">
+        <%= image_tag(@photo_url = photo["prefix"] + "cap250" + photo["suffix"]) %>
+      </div>
+    <% end %>
 </div>
 <div class="reviews">
   <h2>Reviews</h2>
 </div>
 </div>
 </div>
-
-<%= debug JSON.parse(@venue_query.response.body) %>

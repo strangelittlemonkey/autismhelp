@@ -60,7 +60,6 @@ input[type="submit"] {
 }
 
 .all-info {
-  width: 500px;
   padding: 25px;
   font-family: Ubuntu;
   border-bottom: 3px ridge lightblue;
@@ -75,14 +74,31 @@ input[type="submit"] {
     box-shadow:1px 1px 10px #444;
   }
 }
-.photos, .reviews, .address {
+.reviews, .address {
   font-family: Ubuntu;
   padding: 15px;
-  .thumb-photo img {
-    width: 260px;
-    height: 180px;
+}
+
+.photos {
+  border: 0px;
+  display: inline-block;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  .crop {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    display: inline-block;
+    img {
+      width: 300px;
+      height: auto;
+    }
   }
 }
+
 
 /* Navbar */
 
