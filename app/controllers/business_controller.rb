@@ -6,8 +6,8 @@ class BusinessController < ApplicationController
       @lat = @search_result[0]
       @lng = @search_result[1]
     else
-      @lat = 37.795
-      @lng = -122.408
+      @lat = nil
+      @lng = nil
     end
   end
 

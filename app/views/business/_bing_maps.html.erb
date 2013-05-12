@@ -3,19 +3,26 @@
   function GetMap()
   {
     var myLat = null;
-    var myLng = null;//<%= @lng %>;
+    var myLng = null;
+    var orgPinInfobox = null;
+    var orgPins = new Microsoft.Maps.EntityCollection();
+    var orgPinInfoboxes = new Microsoft.Maps.EntityCollection();
     var options = {
       enableHighAccuracy: true,
       timeout: 10000,
-      maximumAge: 0
+      maximumAge: 60000
     };
      
     function success(pos) {
+      console.log('Success fired.')
       var crd = pos.coords;
-      myLat = crd.latitude;
-      myLng = crd.longitude;
-      //alert('success!');
-      //alert('' + myLat + ' ' + crd.longitude);
+      <% if @lat.present? && @lng.present? %>
+        myLat = <%= @lat %>;
+        myLng = <%= @lng %>;
+      <% else %>
+        myLat = crd.latitude;
+        myLng = crd.longitude;
+      <% end %>
       var location = new Microsoft.Maps.Location(myLat, myLng);
       var map = new Microsoft.Maps.Map(document.getElementById('bing_map'), 
         {credentials: 'Av3KxY1c6mhrQ-kkwXXiJLBVEbvUUs-VnYPFtfTGh443r4xyegm7QWbzFILo_mDa',
@@ -24,20 +31,32 @@
          showScalebar: false,
          showDashboard: false,
          zoom: 13});
-      var pushpinOptions = {icon: '/assets/mylocation.png', width: 48, height: 48};
+
+      var pushpinOptions = {
+        icon: '/assets/mylocation.png', 
+        width: 48, 
+        height: 48, 
+        anchor: new Microsoft.Maps.Point(24,24)};
       var pin = new Microsoft.Maps.Pushpin(location, pushpinOptions);
+      orgPins.push(pin);
+
+      orgPinInfobox = new Microsoft.Maps.Infobox(new Microsoft.Maps.Location(0,0), { visible: false });
+      orgPinInfoboxes.push(orgPinInfobox);
 
       //displayMap();
       addPins(map, myLat, myLng);
 
-      map.entities.push(pin);
+      map.entities.push(orgPins);
+      map.entities.push(orgPinInfoboxes);
 
-      Microsoft.Maps.Events.addHandler(map, 'mouseup', click); 
+      Microsoft.Maps.Events.addHandler(map, 'viewchange', hideInfobox);
+      //Microsoft.Maps.Events.addHandler(map, 'mouseup', click); 
       //displayAlert('Perform action on map to fire this event')
     };
 
+    // Temp function for livedemo
     function click() {
-      window.location.assign('business/show');
+    //  window.location.assign('business/show');
     }
      
     function error(err) {
@@ -63,14 +82,42 @@
       $.get(url, function(data) { 
         orgs = data;
         for(var i=0; i < orgs.organizations.length; i++) {
-          var pinLat = orgs.organizations[i].location.latitude;
-          var pinLng = orgs.organizations[i].location.longitude;
+          // Get data for each organization
+          var thisOrg = orgs.organizations[i];
+          var pinLat = thisOrg.location.latitude;
+          var pinLng = thisOrg.location.longitude;
           var pinLocation = new Microsoft.Maps.Location(pinLat, pinLng);
-          
-          map.entities.push(new Microsoft.Maps.Pushpin(pinLocation));
+          var orgPin = new Microsoft.Maps.Pushpin(pinLocation);
+          var orgPage = thisOrg.revtiltApiUrl;
+          orgPin.Title = thisOrg.name;
+          orgPin.Description = thisOrg.categoryText;
+          /*var orgPage = thisOrg.revtiltApiUrl;
+          var orgName = thisOrg.name;
+          var orgCategory = thisOrg.categoryText;*/
+
+          /*orgPinInfobox = new Microsoft.Maps.Infobox(orgPin.getLocation(), {
+            title: orgName,
+            description: 'Category: ' + orgCategory,
+            visible: false,
+            offset: new Microsoft.Maps.Point(0,15)});*/
+
+          Microsoft.Maps.Events.addHandler(orgPin, 'click', displayInfobox);
+          orgPins.push(orgPin);
         }
       })
+    }
+    
+    function displayInfobox(e) {
+      orgPinInfobox.setOptions({
+        title: e.target.Title,
+        descrption: e.target.Description,
+        visible: true,
+        offset: new Microsoft.Maps.Point(0,20)});
+      orgPinInfobox.setLocation(e.target.getLocation());
+    }
 
+    function hideInfobox(e) {
+      orgPinInfobox.setOptions({ visible: false });
     }
 
     navigator.geolocation.getCurrentPosition(success, error, options);
