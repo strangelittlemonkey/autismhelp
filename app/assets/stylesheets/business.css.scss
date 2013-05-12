@@ -14,6 +14,7 @@ body {
   font-family: Ubuntu, sans-serif;
   background: #eeeeee;
   overflow-x: hidden;
+  text-shadow: none !important;
 }
 
 img {
@@ -35,6 +36,34 @@ img {
   text-align: center;
 }
 
+#float_title {
+  position: absolute;
+  color: #fff;
+  font-size: 1.7em;
+  top: 10px;
+  left: 20px;
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+#float_links {
+  position: absolute;
+  color: #fff;
+  font-size: 1.2em;
+  //font-weight: bold;
+  top: 10px;
+  left: 180px;
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+  a:hover { 
+    color: #cef;
+  }
+}
+
 #overlay_debug {
   position: absolute;
   background-color: #fff;
@@ -43,6 +72,10 @@ img {
   height: 40px;
   z-index: 50;
   text-align: center;
+}
+
+#static_content {
+  margin: 25px;
 }
 
 input[type="text"], input[type="submit"] {
@@ -92,21 +125,21 @@ input[type="submit"] {
 }
 
 .photos {
-  border: 0px;
   display: inline-block;
+  width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
-  margin-left: 25px;
+  margin-left: 0px;
+  margin-right: 0px;
   -webkit-overflow-scrolling: touch;
-  width: 100%;
   .crop {
     width: 200px;
     height: 200px;
     overflow: hidden;
     display: inline-block;
     img {
-      width: 350px;
+      width: 300px;
       height: auto;
     }
   }
@@ -115,6 +148,19 @@ input[type="submit"] {
 .rating {
   display: inline-block;
   float: right;
+}
+
+
+/* Map */
+
+.infobox {
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 10px 10px 10px 0px;
+  width: 230px;
+  height: 90px;
+  padding: 5px 10px 5px 10px;
+  opacity: 0.9;
 }
 
 

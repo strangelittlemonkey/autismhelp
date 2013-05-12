@@ -20,8 +20,6 @@
       myLng = crd.longitude;
       
       loadMap(myLat, myLng);
-      //Microsoft.Maps.Events.addHandler(map, 'mouseup', click); 
-      //displayAlert('Perform action on map to fire this event')
     };
 
     function loadMap(lat, lng) {
@@ -45,7 +43,6 @@
       orgPinInfobox = new Microsoft.Maps.Infobox(new Microsoft.Maps.Location(0,0), { visible: false });
       orgPinInfoboxes.push(orgPinInfobox);
 
-      //displayMap();
       addPins(map, lat, lng);
 
       map.entities.push(orgPins);
@@ -58,20 +55,6 @@
       console.warn('ERROR(' + err.code + '): ' + err.message);
     };
 
-    /*function displayMap() {
-      
-      
-      if (myLat == 37.795 && myLng == -122.408) {
-      }
-      else {
-        map.entities.push(pin);
-        map.setView({
-          center: location,
-          zoom: 16
-        });
-      }
-    };*/
-
     function addPins(map, lat, lng) {
       var url = 'http://revtilt.com/api/v1/organizations.json?latitude=' + lat + '&longitude=' + lng + '&radius=2'
       $.get(url, function(data) { 
@@ -83,18 +66,12 @@
           var pinLng = thisOrg.location.longitude;
           var pinLocation = new Microsoft.Maps.Location(pinLat, pinLng);
           var orgPin = new Microsoft.Maps.Pushpin(pinLocation);
-          orgPin.Url = thisOrg.revtiltUrl;
+          
+          // Attach values to the pin
           orgPin.Title = thisOrg.name;
           orgPin.Description = thisOrg.categoryText;
-          /*var orgPage = thisOrg.revtiltApiUrl;
-          var orgName = thisOrg.name;
-          var orgCategory = thisOrg.categoryText;*/
-
-          /*orgPinInfobox = new Microsoft.Maps.Infobox(orgPin.getLocation(), {
-            title: orgName,
-            description: 'Category: ' + orgCategory,
-            visible: false,
-            offset: new Microsoft.Maps.Point(0,15)});*/
+          orgPin.Rating = thisOrg.reviewSummary.avgReview;
+          orgPin.Url = thisOrg.revtiltUrl;
 
           Microsoft.Maps.Events.addHandler(orgPin, 'click', displayInfobox);
           orgPins.push(orgPin);
@@ -103,12 +80,12 @@
     }
     
     function displayInfobox(e) {
+      // Custom Infobox HTML
+      var infoboxHtml = '<div class="infobox"><b><a href="' + generateLink(e.target.Url) + '">' + e.target.Title + '</a></b><br />Category: ' + e.target.Description + '<br />Rating: ' + e.target.Rating + '</div>';
       orgPinInfobox.setOptions({
-        title: e.target.Title,
-        description: e.target.Description,
-        titleClickHandler: followLink(e.target.Url),
         visible: true,
-        offset: new Microsoft.Maps.Point(0,20)});
+        htmlContent: infoboxHtml,
+        offset: new Microsoft.Maps.Point(0,28)});
       orgPinInfobox.setLocation(e.target.getLocation());
     }
 
@@ -119,14 +96,13 @@
     function getIdFromApiUrl(url) {
       var getId = new RegExp("[0-9]+");
       id = getId.exec(url)
-      console.log('Regex input string : ' + url)
-      console.log('Matched Regex :' + id);
       return id[0];
     }
 
-    function followLink(url) {
+    function generateLink(url) {
       id = getIdFromApiUrl(url);
-      window.location.href = 'business/show?oid=' + id;
+      link = 'business/show?oid=' + id;
+      return link;
     }
 
     <% if @lat.present? && @lng.present? %>

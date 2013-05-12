@@ -3,5 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $(document).ready ->
-  $("#search-query").on 'click', ->
-    $(this).val ""
+  searchbox = $("#search-query")
+  searchbox.on 'click', ->
+    if searchbox.val() == "Search" 
+      $(this).val ""

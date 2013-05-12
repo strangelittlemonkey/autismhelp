@@ -1,5 +1,6 @@
 Autismhelp::Application.routes.draw do
   get "about" => "business#about"
+  get "team" => "business#team"
 
   resources :business
   root to: "business#index"
