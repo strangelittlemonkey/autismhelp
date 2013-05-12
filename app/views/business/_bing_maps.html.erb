@@ -56,7 +56,7 @@
     };
 
     function addPins(map, lat, lng) {
-      var url = 'http://revtilt.com/api/v1/organizations.json?latitude=' + lat + '&longitude=' + lng + '&radius=2'
+      var url = 'http://revtilt.com/api/v1/organizations.json?latitude=' + lat + '&longitude=' + lng + '&radius=3'
       $.get(url, function(data) { 
         orgs = data;
         // Get data for each organization
