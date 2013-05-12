@@ -1,4 +1,6 @@
-
+<script>
+    $.get('<%= @revtilt_url %>', function(data) {alert(data)})
+</script>
 <%= render 'business/navbar' %>
    <div class="row-fluid">
      <div class="span5">
@@ -15,11 +17,7 @@
 </div>
 </div>
 <br>
-<div class="address">
-  <p>800 N Point St<br>
-  San Francisco, CA 94109</p>
-</div>
- <h2>Photos</h2>
+ <h2 class="photos">Photos</h2>
 <div class="photos">
     <% (JSON.parse(@photo_query.response.body)["response"]["photos"]["items"]).each do |photo| %>
       <div class="crop">
