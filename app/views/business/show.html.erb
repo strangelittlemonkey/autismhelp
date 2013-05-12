@@ -14,7 +14,7 @@
 <h2 id="name"><%= @org['organization']['name'] %></h2>
   <% org_rating = @org['organization']['reviewSummary']['avgReview'].to_i %>
   <% org_rating.times do |star| %>
-    <%= image_tag('redstar.png', :size => "20x20" ) %>
+    <%= image_tag('redstar.png', :size => "20x20") %>
   <% end %>
 <p class="attributes"><%= @org['organization']['categoryText'].capitalize %></p>
 </div>

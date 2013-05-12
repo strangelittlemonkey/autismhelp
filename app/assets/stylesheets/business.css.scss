@@ -64,6 +64,16 @@ img {
   }
 }
 
+#overlay_current_location_icon {
+  position: absolute;
+  display: inline-block;
+  height: 48px;
+  width: 48px;
+  bottom: 15px;
+  left: 20px;
+  z-index: 50;
+}
+
 #overlay_debug {
   position: absolute;
   background-color: #fff;
