@@ -2,8 +2,8 @@
 <script type="text/javascript">
   function GetMap()
   {
-    var myLat = null;
-    var myLng = null;
+    var myLat = 37.796;   // Default lat, lng
+    var myLng = -122.406;
     var orgPinInfobox = null;
     var orgPins = new Microsoft.Maps.EntityCollection();
     var orgPinInfoboxes = new Microsoft.Maps.EntityCollection();
@@ -14,16 +14,18 @@
     };
      
     function success(pos) {
-      console.log('Success fired.')
+      console.log('GetLocation Success. Map is loading.');
       var crd = pos.coords;
-      <% if @lat.present? && @lng.present? %>
-        myLat = <%= @lat %>;
-        myLng = <%= @lng %>;
-      <% else %>
-        myLat = crd.latitude;
-        myLng = crd.longitude;
-      <% end %>
-      var location = new Microsoft.Maps.Location(myLat, myLng);
+      myLat = crd.latitude;
+      myLng = crd.longitude;
+      
+      loadMap(myLat, myLng);
+      //Microsoft.Maps.Events.addHandler(map, 'mouseup', click); 
+      //displayAlert('Perform action on map to fire this event')
+    };
+
+    function loadMap(lat, lng) {
+      var location = new Microsoft.Maps.Location(lat, lng);
       var map = new Microsoft.Maps.Map(document.getElementById('bing_map'), 
         {credentials: 'Av3KxY1c6mhrQ-kkwXXiJLBVEbvUUs-VnYPFtfTGh443r4xyegm7QWbzFILo_mDa',
          center: location,
@@ -44,20 +46,13 @@
       orgPinInfoboxes.push(orgPinInfobox);
 
       //displayMap();
-      addPins(map, myLat, myLng);
+      addPins(map, lat, lng);
 
       map.entities.push(orgPins);
       map.entities.push(orgPinInfoboxes);
 
       Microsoft.Maps.Events.addHandler(map, 'viewchange', hideInfobox);
-      //Microsoft.Maps.Events.addHandler(map, 'mouseup', click); 
-      //displayAlert('Perform action on map to fire this event')
     };
-
-    // Temp function for livedemo
-    function click() {
-    //  window.location.assign('business/show');
-    }
      
     function error(err) {
       console.warn('ERROR(' + err.code + '): ' + err.message);
@@ -81,14 +76,14 @@
       var url = 'http://revtilt.com/api/v1/organizations.json?latitude=' + lat + '&longitude=' + lng + '&radius=2'
       $.get(url, function(data) { 
         orgs = data;
+        // Get data for each organization
         for(var i=0; i < orgs.organizations.length; i++) {
-          // Get data for each organization
           var thisOrg = orgs.organizations[i];
           var pinLat = thisOrg.location.latitude;
           var pinLng = thisOrg.location.longitude;
           var pinLocation = new Microsoft.Maps.Location(pinLat, pinLng);
           var orgPin = new Microsoft.Maps.Pushpin(pinLocation);
-          var orgPage = thisOrg.revtiltApiUrl;
+          orgPin.Url = thisOrg.revtiltUrl;
           orgPin.Title = thisOrg.name;
           orgPin.Description = thisOrg.categoryText;
           /*var orgPage = thisOrg.revtiltApiUrl;
@@ -110,7 +105,8 @@
     function displayInfobox(e) {
       orgPinInfobox.setOptions({
         title: e.target.Title,
-        descrption: e.target.Description,
+        description: e.target.Description,
+        titleClickHandler: followLink(e.target.Url),
         visible: true,
         offset: new Microsoft.Maps.Point(0,20)});
       orgPinInfobox.setLocation(e.target.getLocation());
@@ -120,9 +116,24 @@
       orgPinInfobox.setOptions({ visible: false });
     }
 
-    navigator.geolocation.getCurrentPosition(success, error, options);
-    //alert('Lat: ' + myLat + ' | Lng: ' + myLng);
-    //console.log(getUrlVars());
-    
+    function getIdFromApiUrl(url) {
+      var getId = new RegExp("[0-9]+");
+      id = getId.exec(url)
+      console.log('Regex input string : ' + url)
+      console.log('Matched Regex :' + id);
+      return id[0];
+    }
+
+    function followLink(url) {
+      id = getIdFromApiUrl(url);
+      window.location.href = 'business/show?id=' + id;
+    }
+
+    <% if @lat.present? && @lng.present? %>
+      console.log("lat, lng present");
+      loadMap(<%= @lat %>, <%= @lng %>);
+    <% else %>
+      navigator.geolocation.getCurrentPosition(success, error, options);
+    <% end %>
   }
 </script>
