@@ -9,8 +9,6 @@
       timeout: 5000,
       maximumAge: 0
     };
-
-
      
     function success(pos) {
       var crd = pos.coords;
@@ -26,11 +24,21 @@
          showScalebar: false,
          showDashboard: false,
          zoom: 14});
-      var pin = new Microsoft.Maps.Pushpin(location);
+      var pushpinOptions = {icon: '/assets/mylocation.png', width: 48, height: 48};
+      var pin = new Microsoft.Maps.Pushpin(location, pushpinOptions);
 
       //displayMap();
       addPins(map, myLat, myLng);
+
+      map.entities.push(pin);
+
+      Microsoft.Maps.Events.addHandler(map, 'click', click); 
+      //displayAlert('Perform action on map to fire this event')
     };
+
+    function click() {
+      window.location.assign('business/show');
+    }
      
     function error(err) {
       console.warn('ERROR(' + err.code + '): ' + err.message);
@@ -51,7 +59,7 @@
     };*/
 
     function addPins(map, lat, lng) {
-      var url = 'http://revtilt.com/api/v1/organizations.json?latitude=' + lat + '&longitude=' + lng + '&radius=5'
+      var url = 'http://revtilt.com/api/v1/organizations.json?latitude=' + lat + '&longitude=' + lng + '&radius=2'
       $.get(url, function(data) { 
         orgs = data;
         for(var i=0; i < orgs.organizations.length; i++) {
