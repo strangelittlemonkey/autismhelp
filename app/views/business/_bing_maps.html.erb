@@ -6,7 +6,7 @@
     var myLng = null;//<%= @lng %>;
     var options = {
       enableHighAccuracy: true,
-      timeout: 5000,
+      timeout: 10000,
       maximumAge: 0
     };
      
@@ -23,7 +23,7 @@
          mapTypeId: Microsoft.Maps.MapTypeId.road,
          showScalebar: false,
          showDashboard: false,
-         zoom: 14});
+         zoom: 13});
       var pushpinOptions = {icon: '/assets/mylocation.png', width: 48, height: 48};
       var pin = new Microsoft.Maps.Pushpin(location, pushpinOptions);
 
