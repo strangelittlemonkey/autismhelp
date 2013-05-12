@@ -9,6 +9,8 @@
       timeout: 5000,
       maximumAge: 0
     };
+
+
      
     function success(pos) {
       var crd = pos.coords;
@@ -16,16 +18,6 @@
       myLng = crd.longitude;
       //alert('success!');
       //alert('' + myLat + ' ' + crd.longitude);
-
-      displayMap();
-      pinLocations();
-    };
-     
-    function error(err) {
-      console.warn('ERROR(' + err.code + '): ' + err.message);
-    };
-
-    function displayMap() {
       var location = new Microsoft.Maps.Location(myLat, myLng);
       var map = new Microsoft.Maps.Map(document.getElementById('bing_map'), 
         {credentials: 'Av3KxY1c6mhrQ-kkwXXiJLBVEbvUUs-VnYPFtfTGh443r4xyegm7QWbzFILo_mDa',
@@ -35,6 +27,18 @@
          showDashboard: false,
          zoom: 14});
       var pin = new Microsoft.Maps.Pushpin(location);
+
+      //displayMap();
+      addPins(map, myLat, myLng);
+    };
+     
+    function error(err) {
+      console.warn('ERROR(' + err.code + '): ' + err.message);
+    };
+
+    /*function displayMap() {
+      
+      
       if (myLat == 37.795 && myLng == -122.408) {
       }
       else {
@@ -44,9 +48,20 @@
           zoom: 16
         });
       }
-    };
+    };*/
 
-    function pinLocations() {
+    function addPins(map, lat, lng) {
+      var url = 'http://revtilt.com/api/v1/organizations.json?latitude=' + lat + '&longitude=' + lng + '&radius=5'
+      $.get(url, function(data) { 
+        orgs = data;
+        for(var i=0; i < orgs.organizations.length; i++) {
+          var pinLat = orgs.organizations[i].location.latitude;
+          var pinLng = orgs.organizations[i].location.longitude;
+          var pinLocation = new Microsoft.Maps.Location(pinLat, pinLng);
+          
+          map.entities.push(new Microsoft.Maps.Pushpin(pinLocation));
+        }
+      })
 
     }
 
