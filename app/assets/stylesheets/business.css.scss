@@ -13,6 +13,11 @@ body {
   padding: 0px;
   font-family: Ubuntu, sans-serif;
   background: #eeeeee;
+  overflow-x: hidden;
+}
+
+img {
+  vertical-align: top;
 }
 
 #bing_map {
@@ -61,18 +66,24 @@ input[type="submit"] {
 }
 
 .all-info {
-  padding: 25px;
+  display: inline-block;
+  width: 100%;
+  padding: 15px 25px 25px 25px;
   font-family: Ubuntu;
-  border-bottom: 3px ridge lightblue;
+  border-bottom: 3px solid lightblue;
   .attributes {
     margin-top: 10px;
   }
   .main-image img {
+    display: inline-block;
     width: 150px;
     float: left;
     margin-right: 20px;
     border-radius: 6px;
     box-shadow:1px 1px 10px #444;
+  }
+  .business-info {
+    display: inline-block;
   }
 }
 .reviews, .address {
@@ -95,7 +106,7 @@ input[type="submit"] {
     overflow: hidden;
     display: inline-block;
     img {
-      width: 300px;
+      width: 350px;
       height: auto;
     }
   }
@@ -114,11 +125,12 @@ input[type="submit"] {
   background-color: #113971;
   background-image: none;
   background-repeat: no-repeat;
-  filter:none;
+  filter: none;
   border-bottom: 1px solid black;
   border-top: none;
   border-left: none;
   border-right: none;
+  text-shadow: none;
   a.brand {
     color: white;
   }

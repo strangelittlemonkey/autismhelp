@@ -1,64 +1,56 @@
+<% content_for :show do %>
+  <%= render 'do_nothing' %>
+<% end %>
+
 <%= render 'business/navbar' %>
    <div class="row-fluid">
-     <div class="span5">
+     <div class="span12">
 <div class="all-info">
 <div class="main-image">
-  <% @main_image = (JSON.parse(@photo_query.response.body)["response"]["photos"]["items"]).last %>
-        <%= image_tag(@main_image["prefix"] + "cap250" + @main_image["suffix"]) %>
+  <% main_image = @photo_data["response"]["photos"]["items"].last %>
+  <%= image_tag(main_image["prefix"] + "cap250" + main_image["suffix"]) %>
 </div>
 <div class="business-info">
-<h2 id="name">JumpStart</h2>
-  <% 5.times do |star| %>
-  <%= image_tag('redstar.png', :size => "20x20" ) %>
+<h2 id="name"><%= @org['organization']['name'] %></h2>
+  <% org_rating = @org['organization']['reviewSummary']['avgReview'].to_i %>
+  <% org_rating.times do |star| %>
+    <%= image_tag('redstar.png', :size => "20x20" ) %>
   <% end %>
-<p class="attributes">Autism friendly</p>
+<p class="attributes"><%= @org['organization']['categoryText'].capitalize %></p>
 </div>
 </div>
 <br>
- <h2 class="photos">Photos</h2>
+
+<h2 class="photos">Photos (<%= @num_photos %>)</h2>
 <div class="photos">
-    <% (JSON.parse(@photo_query.response.body)["response"]["photos"]["items"]).each do |photo| %>
+    <% @photo_data["response"]["photos"]["items"].each do |photo| %>
       <div class="crop">
-        <%= image_tag(@photo_url = photo["prefix"] + "cap250" + photo["suffix"]) %>
+        <%= image_tag(photo["prefix"] + "cap250" + photo["suffix"]) %>
       </div>
     <% end %>
 </div>
 <hr>
+
 <div class="reviews">
   <h2>Reviews</h2>
-  <span class="written-by"><p class="label">Thomas </p>  May 05, 2013</span>
-  <div class="rating">
-  <% 5.times do |star| %>
-      <%= image_tag('redstar.png', :size => "20x20" ) %>
+
+  <% if @reviews.blank? %>
+    No Reviews.
+  <% else %>
+    <% @reviews.each do |r| %>
+      <span class="written-by"><p class="label"><%= r['username'] %></p>
+      <%= time_ago_in_words(r['createdAt']) %>
+      <% review_rating = r['rating'] %>
+      <% review_rating.times do |star| %>
+        <%= image_tag('redstar.png', :size => "20x20" ) %>
+      <% end %>
+      <br />
+      <p class="review">
+        <%= r['content'].html_safe %>
+      </p>
+      <% if r != @reviews.last %>
+        <hr>
+      <% end %>
+    <% end %>
   <% end %>
-    </div>
-  <br>
-  <p class="review">
-    From Yelp: JumpStart provides an invaluable services to parents and caregivers of children diagnosed with autism. JumpStart provides a comprehensive program aimed at empowering the parents of newly diagnosed children. Their staff is knowledgeable and caring and with all the rescources available in the Bay Area this is one that should not be missed! As someone who works in San Francisco as a service providor I always make sure my families have worked with JumpStart!!
-  </p>
-  <hr>
-  <span class="written-by"><p class="label">Jane </p>  April 13, 2013</span>
-  <div class="rating">
-  <% 5.times do |star| %>
-      <%= image_tag('redstar.png', :size => "20x20" ) %>
-  <% end %>
-    </div>
-  <br>
-  <p class="review">
-    From Yelp: This program is a must for families beginning on their journey to help their Austistic child reach his full potential!
-
-    Before coming to Jump Start, all the doctors and evaluators would say is "we don't know" and my personal favorite "we'll have to wait and see how he does with therapy".
-
-    That is a load of crap.
-
-    As parents, you can't wait & see. There's a lot we don't know about Autism, but what is known is that intervention early on is the best path to recovery. It's crucial that parents have a full understanding of what their child is experiencing and are active & educated participants in the therapies they receive.
-
-    My familly's week with the Jump Start program was the first time in the 3 months since I first suspected something different was happening in my 2 year old son's world that the professionals gave me concrete advice and direction about how to deal with everyday life with a child on the Spectrum.
-
-    We received fantastic coaching & education from experts in behavior, speech and play that yeilded obvious improvements in my son by the end of the program. They also had a wealth of referrals of everything from names of providers of specific services to navigating the system of obtaining services.
-
-    It's going to be challenging for any family dealing with this disorder, but Jump Start is the place to begin.
-  </p>
-</div>
-</div>
 </div>

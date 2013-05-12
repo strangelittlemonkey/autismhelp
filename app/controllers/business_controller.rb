@@ -14,11 +14,18 @@ class BusinessController < ApplicationController
   def show
     @lat = 37.7849074
     @lng = -122.4073169
-    @venue_query = HTTParty.get('https://api.foursquare.com/v2/venues/search?ll=' + @lat.to_s + ',' + @lng.to_s + '&oauth_token=2YEFFRGQYVIGT2EJ30RHYLGELUCW04KHQM231ZSM3HOXQFBS&v=20130511')
-    @venue_id = JSON.parse(@venue_query.response.body)["response"]["venues"][0]["id"]
 
-    @photo_query = HTTParty.get("https://api.foursquare.com/v2/venues/" + @venue_id + "/photos?oauth_token=2YEFFRGQYVIGT2EJ30RHYLGELUCW04KHQM231ZSM3HOXQFBS&v=20130511")
-    @num_photos = JSON.parse(@photo_query.response.body)["response"]["photos"]["count"]
+    revtilt_query = HTTParty.get('http://revtilt.com/api/v1/organizations/' + params[:oid] + '.json?page=1')
+    @org = JSON.parse(revtilt_query.response.body)
+    @reviews = @org['reviews']
+
+    venue_query = HTTParty.get('https://api.foursquare.com/v2/venues/search?ll=' + @org['organization']['location']['latitude'].to_s + ',' + @org['organization']['location']['longitude'].to_s + '&oauth_token=2YEFFRGQYVIGT2EJ30RHYLGELUCW04KHQM231ZSM3HOXQFBS&v=20130511')
+    venue_id = JSON.parse(venue_query.response.body)["response"]["venues"][0]["id"]
+    @venue_data = JSON.parse(venue_query.response.body)
+
+    photo_query = HTTParty.get("https://api.foursquare.com/v2/venues/" + venue_id + "/photos?oauth_token=2YEFFRGQYVIGT2EJ30RHYLGELUCW04KHQM231ZSM3HOXQFBS&v=20130511")
+    @photo_data = JSON.parse(photo_query.response.body)
+    @num_photos = JSON.parse(photo_query.response.body)["response"]["photos"]["count"]
 
     @bus_id = 1
     @revtilt_url = "http://revtilt.com/api/v1/organizations/" + @bus_id.to_s + ".json?page=1"
