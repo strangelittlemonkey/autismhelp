@@ -58,10 +58,9 @@
     function addPins(map, lat, lng) {
       var url = 'http://revtilt.com/api/v1/organizations.json?latitude=' + lat + '&longitude=' + lng + '&radius=3'
       $.get(url, function(data) { 
-        orgs = data;
         // Get data for each organization
-        for(var i=0; i < orgs.organizations.length; i++) {
-          var thisOrg = orgs.organizations[i];
+        for(var i=0; i < data.organizations.length; i++) {
+          var thisOrg = data.organizations[i];
           var pinLat = thisOrg.location.latitude;
           var pinLng = thisOrg.location.longitude;
           var pinLocation = new Microsoft.Maps.Location(pinLat, pinLng);
